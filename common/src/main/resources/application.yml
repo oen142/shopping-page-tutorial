@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: local
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/shopping
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8081

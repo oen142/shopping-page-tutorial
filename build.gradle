@@ -1,8 +1,42 @@
-plugins {
-    id 'org.springframework.boot' version '2.4.3'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://repo.spring.io/snapshot" }
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.4.0-SNAPSHOT"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE"
+        classpath "org.ajoberstar:gradle-git:1.6.0"
+    }
 }
+plugins {
+    id 'org.springframework.boot' version '2.4.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+
+    id 'jacoco'
+    id 'java'
+    id 'idea'
+    id 'maven'
+}
+ext {
+    set('springCloudVersion', "2020.0.0-SNAPSHOT")
+    set('lombokVersion', "1.18.16")
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://jitpack.io" }
+    }
+}
+
+
+def requiredIntegrationProjects = [project(":common")]
+def querydslProjects = [project(":common")]
 
 group = 'com.wani'
 version = '0.0.1-SNAPSHOT'
@@ -17,22 +51,87 @@ configurations {
 repositories {
     mavenCentral()
 }
+subprojects {
 
-dependencies {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
 
-    //security
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    testImplementation 'org.springframework.security:spring-security-test'
+    group = 'co.kr.abee'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '11'
 
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'mysql:mysql-connector-java'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    configurations {
+        developmentOnly
+        runtimeClasspath {
+            extendsFrom developmentOnly
+        }
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+        all {
+            exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        }
+    }
+
+    compileJava.options.encoding = 'UTF-8'
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+            maven { url 'https://jitpack.io' }
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+        implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
+
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+        implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+
 }
+configure(querydslProjects) {
 
-test {
-    useJUnitPlatform()
+    dependencies {
+        compile("com.querydsl:querydsl-core") // querydsl
+        compile("com.querydsl:querydsl-jpa") // querydsl
+        annotationProcessor("com.querydsl:querydsl-apt:4.3.1:jpa") // querydsl JPAAnnotationProcessor 사용 지정
+        annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+        annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+
+    }
+
+    def generated = 'src/main/generated'
+    sourceSets {
+        main.java.srcDirs += [generated]
+    }
+
+    tasks.withType(JavaCompile) {
+        options.annotationProcessorGeneratedSourcesDirectory = file(generated)
+    }
+
+    clean.doLast {
+        file(generated).deleteDir()
+    }
 }

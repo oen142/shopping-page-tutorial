@@ -11,16 +11,13 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Order extends AbstractEntity {
+public class Orders extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long id;
 
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private Member orderer;
 
 
 }

@@ -1,1 +1,3 @@
 rootProject.name = 'abee-page-tutorial'
+
+include 'common'

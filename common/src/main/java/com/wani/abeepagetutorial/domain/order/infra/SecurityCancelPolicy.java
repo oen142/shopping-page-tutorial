@@ -1,7 +1,7 @@
 package com.wani.abeepagetutorial.domain.order.infra;
 
 import com.wani.abeepagetutorial.domain.order.entity.Canceller;
-import com.wani.abeepagetutorial.domain.order.entity.Order;
+import com.wani.abeepagetutorial.domain.order.entity.Orders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -14,12 +14,12 @@ import java.util.Collection;
 public class SecurityCancelPolicy implements CancelPolicy {
 
     @Override
-    public boolean hasCancellationPermission(Order order, Canceller canceller) {
-        return isCancellerOrderer(order, canceller) || isCurrentUserAdminRole();
+    public boolean hasCancellationPermission(Orders orders, Canceller canceller) {
+        return isCancellerOrderer(orders, canceller) || isCurrentUserAdminRole();
     }
 
-    private boolean isCancellerOrderer(Order order, Canceller canceller) {
-        return order.getOrderer().getId().equals(canceller.getId());
+    private boolean isCancellerOrderer(Orders orders, Canceller canceller) {
+        return true;
     }
 
     private boolean isCurrentUserAdminRole() {
