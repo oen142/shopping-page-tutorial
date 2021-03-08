@@ -10,20 +10,13 @@ import java.util.List;
 @NoArgsConstructor
 public class MemberPageResponse {
 
-    private int totalPages;
-    private boolean isFirstPage;
-    private boolean isLastPage;
-    private int page;
-    private int size;
+
+    private PageResponse page;
     private List<MemberResponse> members;
 
     @Builder
-    public MemberPageResponse(int totalPages, boolean isFirstPage, boolean isLastPage, int page, int size, List<MemberResponse> members) {
-        this.totalPages = totalPages;
-        this.isFirstPage = isFirstPage;
-        this.isLastPage = isLastPage;
+    public MemberPageResponse(PageResponse page, List<MemberResponse> members) {
         this.page = page;
-        this.size = size;
         this.members = members;
     }
 }

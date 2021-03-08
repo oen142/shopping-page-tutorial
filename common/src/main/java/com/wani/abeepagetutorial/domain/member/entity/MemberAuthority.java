@@ -2,11 +2,14 @@ package com.wani.abeepagetutorial.domain.member.entity;
 
 
 import com.wani.abeepagetutorial.domain.common.AbstractEntity;
+import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberAuthority extends AbstractEntity {
 
     @Id

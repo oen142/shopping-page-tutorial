@@ -5,6 +5,7 @@ import com.wani.abeepagetutorial.domain.member.repository.MemberRepository;
 import com.wani.abeepagetutorial.request.MemberEnrollRequest;
 import com.wani.abeepagetutorial.response.MemberPageResponse;
 import com.wani.abeepagetutorial.response.MemberResponse;
+import com.wani.abeepagetutorial.response.PageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,12 +24,15 @@ public class MemberService {
     public MemberPageResponse findMembers(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
         Page<Member> members = memberRepository.findAll(pageRequest);
-        return MemberPageResponse.builder()
+        PageResponse pageResponse = PageResponse.builder()
                 .totalPages(members.getTotalPages())
                 .isFirstPage(members.isFirst())
                 .isLastPage(members.isLast())
                 .page(page)
                 .size(size)
+                .build();
+        return MemberPageResponse.builder()
+                .page(pageResponse)
                 .members(members.stream()
                         .map(MemberResponse::of)
                         .collect(Collectors.toList()))
