@@ -1,4 +1,4 @@
-package com.wani.abeepagetutorial.response;
+package com.wani.abeepagetutorial.domain.member.response;
 
 import lombok.Builder;
 import lombok.Getter;

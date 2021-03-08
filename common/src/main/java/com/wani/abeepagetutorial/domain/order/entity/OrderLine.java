@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Embeddable
+@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class OrderLine {

@@ -2,6 +2,6 @@ package com.wani.abeepagetutorial.domain.order.entity;
 
 public enum OrderStatus {
 
-    DELIVERY,
-    CANCEL
+    PAYMENT_WAITING, PREPARING, SHIPPED, DELIVERING, DELIVERY_COMPLETED, CANCELED;
+
 }

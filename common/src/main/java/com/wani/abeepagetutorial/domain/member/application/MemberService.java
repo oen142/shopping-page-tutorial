@@ -1,11 +1,11 @@
-package com.wani.abeepagetutorial.application;
+package com.wani.abeepagetutorial.domain.member.application;
 
 import com.wani.abeepagetutorial.domain.member.entity.Member;
 import com.wani.abeepagetutorial.domain.member.repository.MemberRepository;
-import com.wani.abeepagetutorial.request.MemberEnrollRequest;
-import com.wani.abeepagetutorial.response.MemberPageResponse;
-import com.wani.abeepagetutorial.response.MemberResponse;
-import com.wani.abeepagetutorial.response.PageResponse;
+import com.wani.abeepagetutorial.domain.member.request.MemberEnrollRequest;
+import com.wani.abeepagetutorial.domain.member.response.MemberPageResponse;
+import com.wani.abeepagetutorial.domain.member.response.MemberResponse;
+import com.wani.abeepagetutorial.domain.member.response.PageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

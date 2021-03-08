@@ -1,7 +1,7 @@
 package com.wani.abeepagetutorial.domain.member.entity;
 
 
-import com.wani.abeepagetutorial.domain.common.AbstractEntity;
+import com.wani.abeepagetutorial.domain.common.entity.AbstractEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;

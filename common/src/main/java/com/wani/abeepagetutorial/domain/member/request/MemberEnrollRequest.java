@@ -1,4 +1,4 @@
-package com.wani.abeepagetutorial.request;
+package com.wani.abeepagetutorial.domain.member.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

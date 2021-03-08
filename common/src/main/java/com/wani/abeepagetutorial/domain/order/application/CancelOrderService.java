@@ -5,6 +5,7 @@ import com.wani.abeepagetutorial.domain.order.entity.Canceller;
 import com.wani.abeepagetutorial.domain.order.entity.Orders;
 import com.wani.abeepagetutorial.domain.order.exception.NoOrderException;
 import com.wani.abeepagetutorial.domain.order.repository.OrderRepository;
+import com.wani.abeepagetutorial.domain.order.response.CancelOrderResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,5 +26,9 @@ public class CancelOrderService {
     private Orders findOrder(Long orderId) {
         return orderRepository.findById(orderId)
                 .orElseThrow(NoOrderException::new);
+    }
+
+    public CancelOrderResponse findCancelOrders(Long orderId, int page, int size) {
+        return null;
     }
 }

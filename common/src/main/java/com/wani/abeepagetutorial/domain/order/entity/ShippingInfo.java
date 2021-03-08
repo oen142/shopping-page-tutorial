@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Embeddable
 @NoArgsConstructor
 @Getter
-public class ShoppingInfo {
+public class ShippingInfo {
 
     @Embedded
     @AttributeOverrides({
@@ -25,7 +25,7 @@ public class ShoppingInfo {
     @Embedded
     private Receiver receiver;
 
-    public ShoppingInfo(Address address, String message, Receiver receiver) {
+    public ShippingInfo(Address address, String message, Receiver receiver) {
         this.address = address;
         this.message = message;
         this.receiver = receiver;

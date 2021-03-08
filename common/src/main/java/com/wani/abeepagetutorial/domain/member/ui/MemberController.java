@@ -1,9 +1,9 @@
-package com.wani.abeepagetutorial.controller;
+package com.wani.abeepagetutorial.domain.member.ui;
 
-import com.wani.abeepagetutorial.application.MemberService;
-import com.wani.abeepagetutorial.request.MemberEnrollRequest;
-import com.wani.abeepagetutorial.response.MemberPageResponse;
-import com.wani.abeepagetutorial.response.MemberResponse;
+import com.wani.abeepagetutorial.domain.member.application.MemberService;
+import com.wani.abeepagetutorial.domain.member.request.MemberEnrollRequest;
+import com.wani.abeepagetutorial.domain.member.response.MemberPageResponse;
+import com.wani.abeepagetutorial.domain.member.response.MemberResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
